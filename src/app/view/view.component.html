@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <  meta name="viewport" content="width=device-width, initial-scale=1"> -->
+</head>
+<body>
+
+
+<div class="row" style="height: 100vh;">
+   
+  <div class="col-md-3" style="border-right: 2px solid; border-color: black;">
+    <h1>Components</h1>
+    <!-- start of component menu  -->
+    <div class="board col-md-12" cdkDropList [cdkDropListData]="tracks" (cdkDropListDropped)="onTrackDrop($event)" cdkDropListOrientation="horizontal">
+
+        <div class="card-list mat-elevation-z1 col-md-12 " >
+          
+          <h2 cdkDragHandle class="mat-h2">{{tracks[0].title}}</h2>
+      
+          <div class="card-list-content" cdkDropList [id]="tracks[0].id" [cdkDropListData]="tracks[0].tasks"
+            [cdkDropListConnectedTo]="trackIds" (cdkDropListDropped)="onTalkDrop($event)">
+      
+      
+              <mat-card *ngFor="let task of tracks[0].tasks" cdkDrag>
+                 <!-- Use the mat-card-content to add the proper spacing. -->
+                <mat-card-content>
+                    {{task.title}}
+                    <div *ngIf="author">{{task.description}}</div>
+                </mat-card-content>
+              </mat-card>
+      
+          </div>
+      
+        </div>
+      
+      </div>  
+            <!-- end of component menu  -->
+  </div>
+
+
+  <div class="col-md-6" style="border-right: 2px solid; border-color: black;">
+    <div class="card" style="width: 20rem; height: 30rem;  text-align: center;margin: 100px auto;z-index: 25; border: 1px solid;">
+        <div class="card-body">
+        <!-- start of screen menu  -->
+        <div class="board col-md-12" cdkDropList [cdkDropListData]="tracks" (cdkDropListDropped)="onTrackDrop($event)" cdkDropListOrientation="horizontal">
+
+            <div class="card-list mat-elevation-z1 col-md-12 " >
+              
+              <!-- <h2 cdkDragHandle class="mat-h2">{{tracks[0].title}}</h2> -->
+          
+              <div class="card-list-content" cdkDropList [id]="tracks[1].id" [cdkDropListData]="tracks[1].tasks"
+                [cdkDropListConnectedTo]="trackIds" (cdkDropListDropped)="onTalkDrop($event)">
+          
+          
+                  <mat-card *ngFor="let task of tracks[1].tasks" cdkDrag>
+                     <!-- Use the mat-card-content to add the proper spacing. -->
+                    <mat-card-content>
+                        {{task.title}}
+                        <div *ngIf="author">{{task.description}}</div>
+                    </mat-card-content>
+                  </mat-card>
+          
+              </div>
+          
+            </div>
+          
+          </div>  
+            <!-- end of component menu  -->
+        </div>
+      </div>
+  </div>
+  <div class="col-md-3" >
+   
+  </div>
+</div>
+
+</body>
+</html>
