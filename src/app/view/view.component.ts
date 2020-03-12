@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Track,Task } from '../shared/Track.model';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, copyArrayItem,moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -15,14 +15,17 @@ export class ViewComponent implements OnInit {
       "id": "todo",
       "tasks": [
         {
+          "parent":"User Interface",
           "id": "first-task",
           "title": "Camera",
           "description": "This is my first task"
         },{
+          "parent":"User Interface",
           "id": "second-task",
           "title": "GPS",
           "description": "This is my second task"
         },{
+          "parent":"User Interface",
           "id": "f-task",
           "title": "Image",
           "description": "This is my third task"
@@ -34,43 +37,28 @@ export class ViewComponent implements OnInit {
       "id": "inprogress",
       "tasks": [
         {
+          "parent":"View",
           "id": "first-task",
           "title": "",
           "description": "This is my first task"
-        },
-        {
-          "id": "second-task",
-          "title": "task 2",
-          "description": "This is my second task"
-        },
-        {
-          "id": "third-task",
-          "title": "task 3",
-          "description": "This is my third task"}
-        
-      ]
-    },
-    {
-      "title": "Screens",
-      "id": "ddone",
-      "tasks": [
-        {
-          "id": "screen-1",
-          "title": "Screen 1",
-          "description": "This is my first task"
-        },{
-          "id": "screen-2",
-          "title": "screen 2",
-          "description": "This is my second task"
-        },{
-          "id": "screen-3",
-          "title": "screen 3  ",
-          "description": "This is my third task"
         }
       ]
     },
+
+    {
+      "title": "dump",
+      "id": "dumps",
+      "tasks": [
+        {
+          "parent":"Dump",
+          "id": "first-task",
+          "title": "",
+          "description": "This is my first task"
+        }
+      ]
+    }
   ];
-  constructor() { dsdsd}
+  constructor() { }
 
   ngOnInit() {
   }
@@ -84,18 +72,44 @@ export class ViewComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data,
+      if(this.checkDuplicates(event.previousContainer.data,event.previousIndex,event.container.data)){
+        
+        event.previousContainer.data[event.previousIndex].parent="View";
+      copyArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+      }
     }
   }
 
-  onTrackDrop(event: CdkDragDrop<Task[]>) {
-    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  dump(event: CdkDragDrop<Task[]>){
+    if (event.previousContainer.data[event.previousIndex].parent=="View"){
+      transferArrayItem(event.previousContainer.data,event.container.data, event.previousIndex, event.currentIndex);
+      this.tracks[2].tasks[1]=null;
+    }
+    else{}
   }
+
+  // onTrackDrop(event: CdkDragDrop<Task[]>) {
+  //   moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  // }
  
   get trackIds(): string[] {
     return this.tracks.map(track => track.id);
+  }
+
+
+  checkDuplicates(a,b,c){
+    // console.log(a[b]);
+    
+    for (var x of c){
+      if (x==a[b]){
+        // console.log(c);
+        return false;
+      }
+
+    }
+    return true;
   }
 }

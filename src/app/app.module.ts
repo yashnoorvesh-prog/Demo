@@ -8,12 +8,14 @@ import {MatCardModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ViewComponent } from './view/view.component';
-
+import { TestingComponent } from './testing/testing.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewComponent,
+    TestingComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,8 +23,9 @@ import { ViewComponent } from './view/view.component';
     DragDropModule,
     MatCardModule,
     BrowserAnimationsModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    HttpModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

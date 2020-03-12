@@ -5,6 +5,7 @@ export interface Track {
   }
   
   export interface Task {
+    parent:string;
     title: string;
     description: string;
     id: string;
