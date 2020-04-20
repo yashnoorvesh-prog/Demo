@@ -10,3 +10,16 @@ export interface Track {
     description: string;
     id: string;
   }
+
+  export interface UserInt{
+    title:string;
+    id:string;
+  }
+  export interface View{
+    title:string;
+    id:string;
+  }
+  export interface Dump{
+    title:string;
+    id:string;
+  }

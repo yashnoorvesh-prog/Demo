@@ -36,12 +36,7 @@ export class ViewComponent implements OnInit {
       "title": "View",
       "id": "inprogress",
       "tasks": [
-        {
-          "parent":"View",
-          "id": "first-task",
-          "title": "",
-          "description": "This is my first task"
-        }
+        
       ]
     },
 
@@ -69,17 +64,26 @@ export class ViewComponent implements OnInit {
     // In case the destination container is different from the previous container, we
     // need to transfer the given task to the target data array. This happens if
     // a task has been dropped on a different track.
+ 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       if(this.checkDuplicates(event.previousContainer.data,event.previousIndex,event.container.data)){
         
-        event.previousContainer.data[event.previousIndex].parent="View";
-      copyArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+       
+       
+      // copyArrayItem(event.previousContainer.data,
+      //   event.container.data,
+      //   event.previousIndex,
+      //   event.currentIndex);
+      // }
+      this.tracks[1].tasks[event.currentIndex]=this.tracks[0].tasks[event.previousIndex]
+      console.log(this.tracks[0].tasks[0].parent)
+      this.tracks[1].tasks[event.currentIndex].parent="View";
       }
+      this.tracks[0].tasks[event.previousIndex].parent="1"
+      console.log(this.tracks[0].tasks[0].parent)
+      console.log(this.tracks[1].tasks[0].parent)
     }
   }
 

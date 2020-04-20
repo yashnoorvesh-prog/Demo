@@ -40,7 +40,7 @@
 
   <div class="col-md-6" style="border-right: 2px solid; border-color: black;">
     <div class="card" style="width: 20rem; height: 30rem;  text-align: center;margin: 20px auto;z-index: 25; border: 1px solid;">
-        <div class="card-body">
+        <div class="card-body" >
         <!-- start of screen menu  -->
         <div class="board col-md-12" cdkDropList [cdkDropListData]="tracks" (cdkDropListDropped)="onTrackDrop($event)" cdkDropListOrientation="horizontal">
 
@@ -48,7 +48,7 @@
               
               <!-- <h2 cdkDragHandle class="mat-h2">{{tracks[0].title}}</h2> -->
           
-              <div class="card-list-content" cdkDropList [id]="tracks[1].id" [cdkDropListData]="tracks[1].tasks"
+              <div class="card-list-content" style="height: 70vh;" cdkDropList [id]="tracks[1].id" [cdkDropListData]="tracks[1].tasks"
                 [cdkDropListConnectedTo]="trackIds" (cdkDropListDropped)="onTalkDrop($event)">
           
           

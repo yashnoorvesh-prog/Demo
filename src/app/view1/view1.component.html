@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+
+<div class="row" style="height: 100vh;">
+   
+  <div class="col-md-3" style="border-right: 2px solid; border-color: black;">
+    <h1>Components</h1>
+    <!-- start of component menu  -->
+    <div 
+    cdkDropList 
+    #componentsList="cdkDropList" 
+    [cdkDropListData]="ComponentList"
+    [cdkDropListConnectedTo]="[selectedComponentList]" 
+    class="movie-list" 
+    (cdkDropListDropped)="onDrop($event)">
+
+        <div class="card-list mat-elevation-z1 col-md-12 " >
+          <div class="card-list-content">
+      
+      
+              <mat-card  *ngFor="let componentList of ComponentList" cdkDrag>
+                 <!-- Use the mat-card-content to add the proper spacing. -->
+                <mat-card-content>
+                    {{componentList}}
+                    <!-- <div *ngIf="author">{{task.description}}</div> -->
+                </mat-card-content>
+              </mat-card>
+      
+          </div>
+      
+        </div>
+      
+      </div>  
+            <!-- end of component menu  -->
+  </div>
+
+
+  <div class="col-md-6" style="border-right: 2px solid; border-color: black;">
+    <div class="card" style="width: 20rem; height: 25rem;  text-align: center;margin: 20px auto;z-index: 25; border: 1px solid;">
+        <div class="card-body" >
+        <!-- start of screen menu  -->
+        <div 
+        cdkDropList 
+        #selectedComponentList="cdkDropList" 
+        [cdkDropListData]="SelectedComponentList"
+        [cdkDropListConnectedTo]="[componentList,drop]" 
+        class="movie-list-2" 
+        (cdkDropListDropped)="onDrop($event)">
+
+            <div class="card-list mat-elevation-z1 col-md-12 " >
+              
+              <!-- <h2 cdkDragHandle class="mat-h2">{{tracks[0].title}}</h2> -->     
+                  <mat-card *ngFor="let selectedComponentList of SelectedComponentList" style="height: 10px;" cdkDrag>
+                     <!-- Use the mat-card-content to add the proper spacing. -->
+                    <mat-card-content style="margin-top: -10px;" >
+                        {{selectedComponentList}}
+                        <!-- <div *ngIf="author">{{task.description}}</div> -->
+                    </mat-card-content>
+                  </mat-card>
+          
+              </div>
+          
+            </div>
+          
+          </div>  
+            <!-- end of component menu  -->
+        </div>
+              <!-- dump -->
+      <div class="board col-md-12" >
+        <div class="card-list mat-elevation-z1 col-md-6 offset-md-3" >
+          
+        
+            <div 
+            cdkDropList 
+            #drop="cdkDropList" 
+            [cdkDropListData]="dumped"
+            [cdkDropListConnectedTo]="[selectedComponentList]" 
+            class="movie-list-2" 
+            (cdkDropListDropped)="onDrop($event)">
+    
+                <div class="card-list mat-elevation-z1" >
+                  
+                  <!-- <h2 cdkDragHandle class="mat-h2">{{tracks[0].title}}</h2> -->     
+                      <mat-card *ngFor="let d of dumped" cdkDrag>
+                         <!-- Use the mat-card-content to add the proper spacing. -->
+                        <mat-card-content>
+                            {{d}}
+                            <!-- <div *ngIf="author">{{task.description}}</div> -->
+                        </mat-card-content>
+                      </mat-card>
+              
+                  </div>
+              
+                </div>
+        </div>
+     
+  </div>
+
+      </div>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+    <h2>Movies</h2>
+    <div 
+    cdkDropList 
+    #moviesList="cdkDropList" 
+    [cdkDropListData]="MoviesList"
+    [cdkDropListConnectedTo]="[doneMovieList]" 
+    class="movie-list" 
+    (cdkDropListDropped)="onDrop($event)">
+    <div class="movie-block" *ngFor="let moviesList of MoviesList" cdkDrag>{{moviesList}}</div>
+ </div>
+ </div>
+ 
+ <div class="container">
+    <h2>Movies Watched</h2>
+    <div 
+    cdkDropList 
+    #doneMovieList="cdkDropList" 
+    [cdkDropListData]="MoviesWatched"
+    [cdkDropListConnectedTo]="[moviesList]" 
+    class="movie-list" 
+    (cdkDropListDropped)="onDrop($event)">
+    <div class="movie-block" *ngFor="let moviesWatched of MoviesWatched" cdkDrag>{{moviesWatched}}</div>
+ </div>
+ </div> -->

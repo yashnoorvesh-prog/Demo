@@ -10,12 +10,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ViewComponent } from './view/view.component';
 import { TestingComponent } from './testing/testing.component';
 import { HttpModule } from '@angular/http';
+import { View1Component } from './view1/view1.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewComponent,
     TestingComponent,
+    View1Component,
   ],
   imports: [
     BrowserModule,

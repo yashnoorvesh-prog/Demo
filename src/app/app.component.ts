@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Track, Task } from './shared/Track.model';
 import {CdkDragDrop,copyArrayItem, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { FileServiceService } from './file-service.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,38 +11,34 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   
-  
-  constructor(private httpClient :HttpClient){
+  SuccessMsg :any;
+  loading:boolean=false;
+  selecteditem=[];
+
+  updateFromChild($event){
+    this.selecteditem = $event;
+  }
+  constructor(private fileService: FileServiceService){
 
   };
-  title = 'angular-drag-drop';
-
-
-
-    /**
-   * An array of all track ids. Each id is associated with a `cdkDropList` for the
-   * track talks. This property can be used to connect all drop lists together.
-   */
- 
-
-  onTalkDrop(event: CdkDragDrop<Task[]>) {
-    // In case the destination container is different from the previous container, we
-    // need to transfer the given task to the target data array. This happens if
-    // a task has been dropped on a different track.
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      copyArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
+  Build() {
+    this.loading=true;
+     var s = this.selecteditem.join();
+    //  console.log(s);
+    this.fileService.buildApk(s).subscribe(response => {
+      this.SuccessMsg=response.text;
+      this.loading=false;
+		}), error => console.log('Error building the project'),
+                 () => console.info('File downloaded successfully');
   }
 
-  // onTrackDrop(event: CdkDragDrop<Track[]>) {
-  //   copyArrayItem(event.previousContainer.data,event.container.data, event.previousIndex, event.currentIndex);
-  // }
- 
+
+  Download() {
+    this.fileService.downloadFile().subscribe(response => {
+			window.location.href = response.url;
+		}), error => console.log('Error downloading the file'),
+                 () => console.info('File downloaded successfully');
+  }
 
 
 }
